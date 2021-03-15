@@ -60,11 +60,12 @@ namespace ModGeo
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ModGeo v1"));
-                app.UseCors(o => o.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());   
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ModGeo v1"));                
             }
 
             //app.UseHttpsRedirection();
+
+            app.UseCors(o => o.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());   
 
             app.UseRouting();
 
