@@ -1,0 +1,41 @@
+---
+apiVersion: "apps/v1"
+kind: "Deployment"
+metadata:
+  name: "sgm-modgeo-k"
+  namespace: "default"
+  labels:
+    app: "sgm-modgeo-k"
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: "sgm-modgeo-k"
+  template:
+    metadata:
+      labels:
+        app: "sgm-modgeo-k"
+    spec:
+      containers:
+      - name: "sgm-modgeo-1"
+        image: "gcr.io/savvy-etching-306403/github.com/rodrigoalexandresc/sgm-modgeo:$SHORT_SHA"
+---
+apiVersion: "autoscaling/v2beta1"
+kind: "HorizontalPodAutoscaler"
+metadata:
+  name: "sgm-modgeo-k-hpa-7x21"
+  namespace: "default"
+  labels:
+    app: "sgm-modgeo-k"
+spec:
+  scaleTargetRef:
+    kind: "Deployment"
+    name: "sgm-modgeo-k"
+    apiVersion: "apps/v1"
+  minReplicas: 1
+  maxReplicas: 5
+  metrics:
+  - type: "Resource"
+    resource:
+      name: "cpu"
+      targetAverageUtilization: 80

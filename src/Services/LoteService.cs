@@ -21,6 +21,7 @@ namespace ModGeo.Services {
 
             loteHistorico.Id = 0;
             loteHistorico.DataAtualizacao = DateTime.Now;
+            Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(loteHistorico));
             
             await loteRepository.AddHistorico(loteHistorico);        
             var loteMessage = new LoteMessage(lote, loteHistorico);
